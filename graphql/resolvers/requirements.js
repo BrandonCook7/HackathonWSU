@@ -1,4 +1,4 @@
-const Requirement = require('../../models/Requirement'); //SKELETON FROM USERS
+const Requirement = require('../../models/Requirement'); //SKELETON
 // const {
 //     ApolloServer,
 //     gql,
