@@ -1,11 +1,13 @@
 const { model, Schema } = require("mongoose");
-const User = require('../../models/User');
-const Requirement = require('../../models/Requirement');
-const Tag = require('../../models/Tag');
+const User = require('./User');
+const Requirement = require('./Requirement');
+const Tag = require('./Tag');
 
 const eventSchema = new Schema({
-  id:  { type: Number, unique: true }, //UID
-  host: { type: User, unique: true }, //Host User
+  eventId:  { type: Number, unique: true }, //UID
+  host: { type: User }, //Host User
+  created: { type: Date, default: Date.now },
+  start: { type: Date },
   name: { type: String },
   description: { type: String },
   requirements: { type: [Requirement], default: null },

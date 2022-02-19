@@ -5,29 +5,20 @@ const Tag = require('../../models/Tag'); //SKELETON
 //     UserInputError
 // } = require('apollo-server');
 // const { ApolloError } = require('apollo-server-errors');
-// const jwt = require("jsonwebtoken");
-// const bcrypt = require("bcryptjs");
 
 // module.exports = {
 //     Mutation: {
-//         async registerUser(_, {registerInput: {username, email, password} }) {
-//             /* Do input validation
-//             if (!(email && password && first_name && last_name)) {
-//                 res.status(400).send("All input is required");
-//             }
-//             */
-//             const oldUser = await User.findOne({ email });
+//         async addTag(_, {registerInput: {category, icon, color} }) {
+//             const oldTag = await Tag.findOne({ category });
 
-//             if (oldUser) {
-//                 throw new ApolloError('A user is already registered with the email: ' + email, 'USER_ALREADY_EXISTS');
+//             if (oldTag) {
+//                 throw new ApolloError('This tag already exists: ' + category, 'TAG_ALREADY_EXISTS');
 //             }
             
-//             var encryptedPassword = await bcrypt.hash(password, 10);
-            
-//             const newUser = new User({
-//                 username: username,
-//                 email: email.toLowerCase(),
-//                 password: encryptedPassword
+//             const newTag = new Tag({
+//                 category: category.tolowerCase(),
+//                 icon: icon.toLowerCase(),
+//                 color: color.toLowerCase()
 //             });
 
 //             const token = jwt.sign(
