@@ -1,4 +1,4 @@
-const User = require('../../models/Event');
+const User = require('../../models/Event'); //SKELETON FROM USERS
 const {
     ApolloServer,
     gql,

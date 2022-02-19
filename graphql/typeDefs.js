@@ -35,19 +35,19 @@ type Event {
     description: String,
     requirements: String,
     location: String,
-    tags: Array,
+    tags: Array
 }
 
 type Tag {
     category: String,
     icon: String,
-    color: Array,
+    color: Array
 }
 
 type Requirement {
     operation: String,
     attribute: String,
-    value: String,
+    value: String
 }
 
 `
