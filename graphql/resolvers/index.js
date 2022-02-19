@@ -1,6 +1,6 @@
-const usersResolvers = require('./users');
 // const eventsResolvers = require('./events');
 const tagsResolvers = require('./tags');
+const usersResolvers = require('./users');
 
 module.exports = {
     Query: {
