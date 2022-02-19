@@ -4,7 +4,6 @@ const Requirement = require('./Requirement');
 const Tag = require('./Tag');
 
 const eventSchema = new Schema({
-  eventId:  { type: Number, unique: true }, //UID
   host: { type: User }, //Host User
   created: { type: Date, default: Date.now },
   start: { type: Date },

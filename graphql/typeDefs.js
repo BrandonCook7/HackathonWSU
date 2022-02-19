@@ -42,7 +42,6 @@ type Requirement {
 }
 
 type Event {
-    id: Int,
     host: User,
     name: String,
     created: String,
