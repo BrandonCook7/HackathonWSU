@@ -5,7 +5,7 @@ const Tag = require('../../models/Tag');
 
 const eventSchema = new Schema({
   id:  { type: Number, unique: true }, //UID
-  host: { type: User, unique: true }, //Host User
+  host: { type: User }, //Host User
   name: { type: String },
   description: { type: String },
   requirements: { type: [Requirement], default: null },
