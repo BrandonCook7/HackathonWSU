@@ -5,7 +5,7 @@ const userSchema = new Schema({
   email: { type: String, unique: true },
   password: { type: String },
   token: { type: String },
-  reputation: { type: Integer, default: 0}
+  reputation: { type: Number, default: 0}
 });
 
 module.exports = model("user", userSchema);
