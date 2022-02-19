@@ -1,83 +1,44 @@
-const User = require('../../models/Event'); //SKELETON FROM USERS
-// const {
-//     ApolloServer,
-//     gql,
-//     UserInputError
-// } = require('apollo-server');
-// const { ApolloError } = require('apollo-server-errors');
-// const jwt = require("jsonwebtoken");
-// const bcrypt = require("bcryptjs");
+const Event = require('../../models/Event');
+const User = require('../../models/User');
+const {
+    ApolloServer,
+    gql,
+    UserInputError
+} = require('apollo-server');
+const { ApolloError } = require('apollo-server-errors');
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
-// module.exports = {
-//     Mutation: {
-//         async registerUser(_, {registerInput: {username, email, password} }) {
-//             /* Do input validation
-//             if (!(email && password && first_name && last_name)) {
-//                 res.status(400).send("All input is required");
-//             }
-//             */
-//             const oldUser = await User.findOne({ email });
 
-//             if (oldUser) {
-//                 throw new ApolloError('A user is already registered with the email: ' + email, 'USER_ALREADY_EXISTS');
-//             }
+module.exports = {
+    Mutation: {
+        async addEvent(_, {eventInput: {host_email, title, description} }) {
             
-//             var encryptedPassword = await bcrypt.hash(password, 10);
-            
-//             const newUser = new User({
-//                 username: username,
-//                 email: email.toLowerCase(),
-//                 password: encryptedPassword
-//             });
+            const hostUser = await User.findOne({ email: host_email });
 
-//             const token = jwt.sign(
-//                 { user_id: newUser._id, email },
-//                 "UNSAFESTRING",
-//                 {
-//                   expiresIn: "2h",
-//                 }
-//             );
+            if (!hostUser) {
+                throw new ApolloError('No User');
+            }
+            else{
+                const addEvent = new Event({
+                    name: title,
+                    description: description,
+                    host: hostUser,
+                    // start: moment.format(start).valueOf(),
+    
+                });
+    
+                const res = await addEvent.save();
+    
+                return {
+                    id: res.id,
+                    ...res._doc
+                }
+            }
+        }
+    },
 
-//             newUser.token = token;
-
-//             const res = await newUser.save();
-            
-//             return {
-//                 id: res.id,
-//                 ...res._doc
-//             };
-//         },
-//         async loginUser(_, {loginInput: {email, password} }) {
-//             /* Do input validation
-//             if (!(email && password)) {
-//                 res.status(400).send("All input is required");
-//             }
-//             */
-//             const user = await User.findOne({ email });
-
-//             if (user && (await bcrypt.compare(password, user.password))) {
-//                 // Create token
-//                 const token = jwt.sign(
-//                   { user_id: user._id, email },
-//                   "UNSAFESTRING",
-//                   {
-//                     expiresIn: "2h",
-//                   }
-//                 );
-          
-//                 // save user token
-//                 user.token = token;
-
-//                 return {
-//                     id: user.id,
-//                     ...user._doc
-//                 }
-//             } else {
-//                 throw new ApolloError('Incorrect password', 'INCORRECT_PASSWORD');
-//             }
-//         }
-//     },
-//     Query: {
-//         user: (_, {ID}) => User.findById(ID)
-//     }
-// }
+    Query: {
+        event: (_, {ID}) => Event.findById(ID)
+    }
+}

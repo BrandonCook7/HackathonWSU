@@ -40,8 +40,10 @@ type Mutation {
     loginUser(loginInput: LoginInput): User
 }
 
-input EventInput{
-    placeholder: String
+input EventInput {
+    host_email: String, 
+    title: String, 
+    description: String
 }
 
 input TagInput{
