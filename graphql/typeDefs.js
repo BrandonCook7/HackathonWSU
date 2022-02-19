@@ -29,11 +29,34 @@ type Mutation {
     loginUser(loginInput: LoginInput): User
 }
 
+type Tag {
+    category: String,
+    icon: String,
+    color: [String]
+}
+
+type Requirement {
+    operation: String,
+    attribute: String,
+    value: String
+}
+
+type Event {
+    id: Int,
+    host: User,
+    name: String,
+    created: String,
+    start: String,
+    description: String,
+    requirements: [String],
+    location: String,
+    tags: [Tag]
+}
 `
 /*
 type Event {
-    id: Number,
-    host: String,
+    id: Int,
+    host: User,
     name: String,
     created: Date,
     start: Date,
