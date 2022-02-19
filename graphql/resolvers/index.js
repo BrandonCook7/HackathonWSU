@@ -4,13 +4,14 @@ const tagsResolvers = require('./tags');
 
 module.exports = {
     Query: {
-        ...usersResolvers.Query,
-        //...eventsResolvers.Query,
+        //...eventResolvers.Query,
         ...tagsResolvers.Query,
+        ...usersResolvers.Query,
+
     },
     Mutation: {
-        ...usersResolvers.Mutation,
         //...eventsResolvers.Mutation,
         ...tagsResolvers.Mutation,
+        ...usersResolvers.Mutation,
     },
 };
