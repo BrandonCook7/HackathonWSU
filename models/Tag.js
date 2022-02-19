@@ -1,10 +1,9 @@
 const { model, Schema } = require("mongoose");
 
-const eventSchema = new Schema({
-  eventName: { type: String },
-  eventId:  { type: Number, unique: true },
-  tags: { type: Array, default: null },
-  reqs: { type: Array, default: null }
+const tagSchema = new Schema({
+  category: { type: String, unique: true },
+  icon:  { type: String},
+  color: { type: Array},
 });
 
 module.exports = model("tag", tagSchema);

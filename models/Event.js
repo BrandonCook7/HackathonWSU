@@ -6,7 +6,7 @@ const eventSchema = new Schema({
   eventName: { type: String },
   eventDescription: { type: String },
   requirements: { type: Array, default: null }, //Requirement Type
-  location: { type: String },
+  location: { type: String }, //Google API String Location
   tags: { type: Array, default: null }, //Tag Type
 });
 
