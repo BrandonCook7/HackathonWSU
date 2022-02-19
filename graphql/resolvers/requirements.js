@@ -1,4 +1,4 @@
-const User = require('../../models/Requirement');
+const User = require('../../models/Requirement'); //SKELETON FROM USERS
 const {
     ApolloServer,
     gql,
