@@ -53,28 +53,3 @@ type Event {
     tags: [Tag]
 }
 `
-/*
-type Event {
-    id: Int,
-    host: User,
-    name: String,
-    created: Date,
-    start: Date,
-    description: String,
-    requirements: String,
-    location: String,
-    tags: Array
-}
-
-type Tag {
-    category: String,
-    icon: String,
-    color: Array
-}
-
-type Requirement {
-    operation: String,
-    attribute: String,
-    value: String
-}
-*/
