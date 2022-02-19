@@ -1,6 +1,5 @@
 const { model, Schema } = require("mongoose");
 const User = require('./User');
-const Requirement = require('./Requirement');
 const Tag = require('./Tag');
 
 const eventSchema = new Schema({
@@ -9,9 +8,10 @@ const eventSchema = new Schema({
   start: { type: Date },
   name: { type: String },
   description: { type: String },
-  requirements: { type: [Requirement], default: null },
+  requirements: { type: [String], default: null },
   location: { type: String }, //Google API String Location
   tags: { type: [Tag], default: null },
+  joined: {type: [User] }
 });
 
 module.exports = model("event", eventSchema);
