@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
 
-const MONGODB = "mongodb+srv://admin:coopercodes@subscriptionserver.n9ghj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const MONGODB = "mongodb+srv://admin:admin.password@cougeevents.0t8dx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 const server = new ApolloServer({
     typeDefs,
