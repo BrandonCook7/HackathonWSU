@@ -6,7 +6,7 @@ type User {
     email: String,
     password: String,
     token: String,
-    repuatation: Number
+    reputation: Int
 }
 
 input RegisterInput {
