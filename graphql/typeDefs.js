@@ -27,4 +27,26 @@ type Mutation {
     registerUser(registerInput: RegisterInput): User
     loginUser(loginInput: LoginInput): User
 }
+
+type Event {
+    username: String,
+    email: String,
+    password: String,
+    token: String
+}
+
+type Tag {
+    username: String,
+    email: String,
+    password: String,
+    token: String
+}
+
+type Requirement {
+    username: String,
+    email: String,
+    password: String,
+    token: String
+}
+
 `
