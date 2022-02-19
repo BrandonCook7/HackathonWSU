@@ -5,8 +5,6 @@ const Tag = require('../../models/Tag'); //SKELETON
 //     UserInputError
 // } = require('apollo-server');
 // const { ApolloError } = require('apollo-server-errors');
-// const jwt = require("jsonwebtoken");
-// const bcrypt = require("bcryptjs");
 
 // module.exports = {
 //     Mutation: {
@@ -19,8 +17,8 @@ const Tag = require('../../models/Tag'); //SKELETON
             
 //             const newTag = new Tag({
 //                 category: category.tolowerCase(),
-//                 email: email.toLowerCase(),
-//                 password: encryptedPassword
+//                 icon: icon.toLowerCase(),
+//                 color: color.toLowerCase()
 //             });
 
 //             const token = jwt.sign(
