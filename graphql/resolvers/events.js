@@ -6,14 +6,10 @@ const {
     UserInputError
 } = require('apollo-server');
 const { ApolloError } = require('apollo-server-errors');
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-
 
 module.exports = {
     Mutation: {
         async addEvent(_, {eventInput: {host_email, title, description} }) {
-            
             const hostUser = await User.findOne({ email: host_email });
 
             if (!hostUser) {
@@ -24,8 +20,7 @@ module.exports = {
                     name: title,
                     description: description,
                     host: hostUser,
-                    // start: moment.format(start).valueOf(),
-    
+                    start: moment.format(start).valueOf(),
                 });
     
                 const res = await addEvent.save();
@@ -37,7 +32,6 @@ module.exports = {
             }
         }
     },
-
     Query: {
         event: (_, {ID}) => Event.findById(ID)
     }
