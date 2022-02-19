@@ -48,7 +48,7 @@ type Event {
     created: String,
     start: String,
     description: String,
-    requirements: [String],
+    requirements: [Requirement],
     location: String,
     tags: [Tag]
 }
