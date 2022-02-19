@@ -28,14 +28,20 @@ type User {
 }
 
 type Query {
-    user(id: ID!): User
+    event(id: ID): Event
     tag(id: ID!): Tag
+    user(id: ID!): User
 }
 
 type Mutation {
+    addEvent(eventInput: EventInput): Event
     addTag(tagInput: TagInput): Tag
     registerUser(registerInput: RegisterInput): User
     loginUser(loginInput: LoginInput): User
+}
+
+input EventInput{
+    placeholder: String
 }
 
 input TagInput{
