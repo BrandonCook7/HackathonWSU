@@ -29,24 +29,25 @@ type Mutation {
 }
 
 type Event {
-    username: String,
-    email: String,
-    password: String,
-    token: String
+    id: Number,
+    host: String,
+    name: String,
+    description: String,
+    requirements: String,
+    location: String,
+    tags: Array,
 }
 
 type Tag {
-    username: String,
-    email: String,
-    password: String,
-    token: String
+    category: String,
+    icon: String,
+    color: Array,
 }
 
 type Requirement {
-    username: String,
-    email: String,
-    password: String,
-    token: String
+    operation: String,
+    attribute: String,
+    value: String,
 }
 
 `
