@@ -7,15 +7,10 @@ type Event {
     created: String,
     start: String,
     description: String,
-    requirements: [Requirement],
+    requirements: [String],
     location: String,
-    tags: [Tag]
-}
-
-type Requirement {
-    operation: String,
-    attribute: String,
-    value: String
+    tags: [Tag],
+    joined: [User]
 }
 
 type Tag {
@@ -43,16 +38,16 @@ type Mutation {
     loginUser(loginInput: LoginInput): User
 }
 
-input RegisterInput {
-    username: String,
-    email: String,
-    password: String 
-}
-
 input TagInput{
     category: String,
     icon: String,
     color: String
+}
+
+input RegisterInput {
+    username: String,
+    email: String,
+    password: String 
 }
 
 input LoginInput {
