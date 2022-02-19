@@ -32,7 +32,7 @@ type Mutation {
 type Tag {
     category: String,
     icon: String,
-    color: [String]
+    color: String
 }
 
 type Requirement {
@@ -42,7 +42,6 @@ type Requirement {
 }
 
 type Event {
-    id: Int,
     host: User,
     name: String,
     created: String,
