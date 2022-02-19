@@ -8,7 +8,7 @@ const { ApolloError } = require('apollo-server-errors');
 
 module.exports = {
     Mutation: {
-        async addTag(_, {registerInput: {category, icon, color} }) {
+        async addTag(_, {tagInput: {category, icon, color} }) {
             const oldTag = await Tag.findOne({ category });
 
             if (oldTag) {
@@ -16,9 +16,9 @@ module.exports = {
             }
             
             const newTag = new Tag({
-                category: category.tolowerCase(),
-                icon: icon.toLowerCase(),
-                color: color.toLowerCase()
+                category: category.toLowerCase(),
+                icon: icon,
+                color: color
             });
 
             const res = await newTag.save();
@@ -28,35 +28,6 @@ module.exports = {
                 ...res._doc
             };
         },
-//         async loginUser(_, {loginInput: {email, password} }) {
-//             /* Do input validation
-//             if (!(email && password)) {
-//                 res.status(400).send("All input is required");
-//             }
-//             */
-//             const user = await User.findOne({ email });
-
-//             if (user && (await bcrypt.compare(password, user.password))) {
-//                 // Create token
-//                 const token = jwt.sign(
-//                   { user_id: user._id, email },
-//                   "UNSAFESTRING",
-//                   {
-//                     expiresIn: "2h",
-//                   }
-//                 );
-          
-//                 // save user token
-//                 user.token = token;
-
-//                 return {
-//                     id: user.id,
-//                     ...user._doc
-//                 }
-//             } else {
-//                 throw new ApolloError('Incorrect password', 'INCORRECT_PASSWORD');
-//             }
-//         }
     },
     Query: {
         tag: (_, {ID}) => Tag.findById(ID)
