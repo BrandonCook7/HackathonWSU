@@ -5,7 +5,8 @@ type User {
     username: String,
     email: String,
     password: String,
-    token: String
+    token: String,
+    repuatation: Number
 }
 
 input RegisterInput {
@@ -28,6 +29,8 @@ type Mutation {
     loginUser(loginInput: LoginInput): User
 }
 
+`
+/*
 type Event {
     id: Number,
     host: String,
@@ -49,5 +52,4 @@ type Requirement {
     attribute: String,
     value: String
 }
-
-`
+*/
