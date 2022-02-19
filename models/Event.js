@@ -1,7 +1,7 @@
 const { model, Schema } = require("mongoose");
-const User = require('User');
-const Requirement = require('Requirement');
-const Tag = require('Tag');
+const User = require('./User');
+const Requirement = require('./Requirement');
+const Tag = require('./Tag');
 
 const eventSchema = new Schema({
   id:  { type: Number, unique: true }, //UID
