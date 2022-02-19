@@ -21,16 +21,6 @@ const Tag = require('../../models/Tag'); //SKELETON
 //                 color: color.toLowerCase()
 //             });
 
-//             const token = jwt.sign(
-//                 { user_id: newUser._id, email },
-//                 "UNSAFESTRING",
-//                 {
-//                   expiresIn: "2h",
-//                 }
-//             );
-
-//             newUser.token = token;
-
 //             const res = await newUser.save();
             
 //             return {

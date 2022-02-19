@@ -32,7 +32,7 @@ type Mutation {
 type Tag {
     category: String,
     icon: String,
-    color: [String]
+    color: String
 }
 
 type Requirement {
