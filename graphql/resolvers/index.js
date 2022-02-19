@@ -6,14 +6,14 @@ const requirementsResolvers = require('./requirements');
 module.exports = {
     Query: {
         ...usersResolvers.Query,
-        ...eventsResolvers.Query,
-        ...tagsResolvers.Query,
-        ...requirementsResolvers.Query,
+        //...eventsResolvers.Query,
+        //...tagsResolvers.Query,
+        //...requirementsResolvers.Query,
     },
     Mutation: {
         ...usersResolvers.Mutation,
-        ...eventsResolvers.Mutation,
-        ...tagsResolver.Mutation,
-        ...requirementsResolvers.Mutation,
+        //...eventsResolvers.Mutation,
+        //...tagsResolver.Mutation,
+        //...requirementsResolvers.Mutation,
     },
 };
