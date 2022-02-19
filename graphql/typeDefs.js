@@ -35,6 +35,8 @@ type Event {
     id: Number,
     host: String,
     name: String,
+    created: Date,
+    start: Date,
     description: String,
     requirements: String,
     location: String,
