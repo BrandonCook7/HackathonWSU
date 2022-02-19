@@ -1,19 +1,17 @@
-const usersResolvers = require('./users');
 // const eventsResolvers = require('./events');
-// const tagsResolvers = require('./tags');
-// const requirementsResolvers = require('./requirements');
+const tagsResolvers = require('./tags');
+const usersResolvers = require('./users');
 
 module.exports = {
     Query: {
+        //...eventResolvers.Query,
+        ...tagsResolvers.Query,
         ...usersResolvers.Query,
-        //...eventsResolvers.Query,
-        //...tagsResolvers.Query,
-        //...requirementsResolvers.Query,
+
     },
     Mutation: {
-        ...usersResolvers.Mutation,
         //...eventsResolvers.Mutation,
-        //...tagsResolver.Mutation,
-        //...requirementsResolvers.Mutation,
+        ...tagsResolvers.Mutation,
+        ...usersResolvers.Mutation,
     },
 };

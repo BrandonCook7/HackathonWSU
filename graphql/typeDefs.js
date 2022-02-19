@@ -1,12 +1,53 @@
 const { gql } = require('apollo-server');
 
 module.exports = gql`
+type Event {
+    host: User,
+    name: String,
+    created: String,
+    start: String,
+    description: String,
+    requirements: [String],
+    location: String,
+    tags: [Tag],
+    joined: [User]
+}
+
+type Tag {
+    category: String,
+    icon: String,
+    color: String
+}
+
 type User {
     username: String,
     email: String,
     password: String,
     token: String,
     reputation: Int
+}
+
+type Query {
+    event(id: ID): Event
+    tag(id: ID!): Tag
+    user(id: ID!): User
+}
+
+type Mutation {
+    addEvent(eventInput: EventInput): Event
+    addTag(tagInput: TagInput): Tag
+    registerUser(registerInput: RegisterInput): User
+    loginUser(loginInput: LoginInput): User
+}
+
+input EventInput{
+    placeholder: String
+}
+
+input TagInput{
+    category: String,
+    icon: String,
+    color: String
 }
 
 input RegisterInput {
@@ -18,38 +59,5 @@ input RegisterInput {
 input LoginInput {
     email: String,
     password: String 
-}
-
-type Query {
-    user(id: ID!): User
-}
-
-type Mutation {
-    registerUser(registerInput: RegisterInput): User
-    loginUser(loginInput: LoginInput): User
-}
-
-type Tag {
-    category: String,
-    icon: String,
-    color: [String]
-}
-
-type Requirement {
-    operation: String,
-    attribute: String,
-    value: String
-}
-
-type Event {
-    id: Int,
-    host: User,
-    name: String,
-    created: String,
-    start: String,
-    description: String,
-    requirements: [String],
-    location: String,
-    tags: [Tag]
 }
 `
