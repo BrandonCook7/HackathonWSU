@@ -88,7 +88,7 @@ module.exports = {
                 mean_total += rep;
             };
             population_mean = mean_total / user_list.length;
-            console.log(population_mean);
+            // console.log(population_mean);
 
             let variance_total = 0;
             let population_variance = 0;
@@ -98,7 +98,7 @@ module.exports = {
                 variance_total += temp_variance;
             };
             population_variance = Math.sqrt(variance_total / user_list.length);
-            console.log(population_variance);
+            // console.log(population_variance);
 
             if ((!user) || (!host)) {
                 throw new ApolloError('User or Host does not exist', 'USER_OR_HOST_DOES_NOT_EXISTS');
@@ -106,15 +106,15 @@ module.exports = {
             else if (user && (show)){
                 host_rep = host.reputation
                 host_z = ((host_rep - population_mean) / population_variance)
-                console.log("Host")
-                console.log(host_rep)
-                console.log(host_z)
+                // console.log("Host")
+                // console.log(host_rep)
+                // console.log(host_z)
 
                 user_rep = user.reputation
                 user_z = ((user_rep - population_mean) / population_variance)
-                console.log("User")
-                console.log(user_rep)
-                console.log(user_z)
+                // console.log("User")
+                // console.log(user_rep)
+                // console.log(user_z)
 
                 if (host_z > user_z) {
                     amount = ((host_z - user_z) * population_variance) + population_mean
@@ -126,15 +126,15 @@ module.exports = {
             else if (user && !(show)){
                 host_rep = host.reputation
                 host_z = ((host_rep - population_mean) / population_variance)
-                console.log("Host")
-                console.log(host_rep)
-                console.log(host_z)
+                // console.log("Host")
+                // console.log(host_rep)
+                // console.log(host_z)
 
                 user_rep = user.reputation
                 user_z = ((user_rep - population_mean) / population_variance)
-                console.log("User")
-                console.log(user_rep)
-                console.log(user_z)
+                // console.log("User")
+                // console.log(user_rep)
+                // console.log(user_z)
 
                 if ((host_z > user_z) && user_rep >= 0) {
                     amount = ((host_z - user_z) * population_variance) + population_mean
