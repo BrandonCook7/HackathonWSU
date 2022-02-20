@@ -76,18 +76,22 @@ module.exports = {
                 throw new ApolloError('Incorrect password', 'INCORRECT_PASSWORD');
             }
         },
-        async updateReputation(_, {reputationInput: {email, show}}) {
+        async updateReputation(_, {reputationInput: {host_email, email, show}}) {
             const user = await User.findOne({ email: email });
+            const host = await User.findOne({ email: host_email });
 
             function get_multipier() {
                 var sample_mean = 0
                 var sample_variance = 0
             }
 
-            if (!user) {
-                throw new ApolloError('User does not exist', 'USER_DOES_NOT_EXISTS');
+            if ((!user) || (!host)) {
+                throw new ApolloError('User or Host does not exist', 'USER_OR_HOST_DOES_NOT_EXISTS');
             } 
             else if (user && (show)){
+                user_rep = user.get(reputation)
+                host_rep = host.get(reputation)
+
                 user.reputation += 1
             } 
             else if (user && !(show)){

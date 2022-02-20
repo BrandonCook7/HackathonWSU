@@ -82,6 +82,7 @@ input RegisterInput {
 }
 
 input ReputationInput {
+    host_email: String,
     email: String,
     show: Int
 }
