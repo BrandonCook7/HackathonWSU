@@ -31,7 +31,7 @@ module.exports = {
                 }
             }
         },
-        async joinEvent(_, {eventJoin: {} }) {
+        async joinEvent(_, {eventJoin: {email} }) {
             
         }
     },
