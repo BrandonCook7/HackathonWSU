@@ -12,6 +12,7 @@ type Event {
     location: String,
     tags: [String],
     joined: [String],
+    eventHasHappened: Boolean,
     slots: Int
 }
 

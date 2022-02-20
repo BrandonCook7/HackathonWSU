@@ -9,11 +9,12 @@ const eventSchema = new Schema({
   start: { type: Date },
   name: { type: String },
   description: { type: String },
-  requirements: { type: Number, default: null },
+  requirements: { type: Number, default: 0 },
   location: { type: String }, //Google API String Location
-  tags: { type: [String], default: null },
-  joined: { type: [String], default: null },
+  tags: { type: [String], default: [] },
+  joined: { type: [String], default: [] },
   slots: { type: Number },
+  eventHasHappened: { type: Boolean, default: false},
   uuid: {type: String, default: uuidv4(), unique: true}
 });
 
