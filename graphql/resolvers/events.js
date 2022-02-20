@@ -13,7 +13,7 @@ module.exports = {
             const hostUser = await User.findOne({ email: host_email });
 
             if (!hostUser) {
-                throw new ApolloError('No User');
+                throw new ApolloError('User does not exist', 'USER_DOES_NOT_EXISTS');
             }
             else{
                 const addEvent = new Event({
