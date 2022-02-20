@@ -17,11 +17,8 @@ module.exports = {
             if (!hostUser) {
                 throw new ApolloError('User does not exist', 'USER_DOES_NOT_EXISTS');
             }
-
             else{
-
                 categories = []
-
                 for (let i = 0; i < tags.length; i++){
                     let cat = await Tag.findOne({ category: tags[i] })
                     if (cat) {
@@ -38,8 +35,6 @@ module.exports = {
                     location: location,
                     start: start_time,
                     slots: slots,
-
-                    // start: moment.format(start).valueOf(),
                 });
     
                 const res = await addEvent.save();
@@ -56,5 +51,6 @@ module.exports = {
     },
     Query: {
         event: (_, {ID}) => Event.findById(ID)
+        
     }
 }
