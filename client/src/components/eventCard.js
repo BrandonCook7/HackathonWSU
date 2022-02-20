@@ -1,9 +1,13 @@
 import { Box, Image, Badge, Text} from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { Circle } from "material-icons";
+import { useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button } from "@chakra-ui/react";
 import 'material-icons/iconfont/material-icons.css';
 
-function EventCard() {
+
+function EventCard(props) {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
     const property = {
       imageUrl: 'https://bit.ly/2Z4KKcF',
       imageAlt: 'Rear view of modern home with pool',
@@ -14,9 +18,23 @@ function EventCard() {
       reviewCount: 34,
       rating: 4,
     }
-  
+
+    const event = props.event;
+    
+    /*
+    event:
+        created: "1645320269815"
+        description: null
+        joined: [{…}]
+        name: "I have fallen and Can't get up"
+        requirements: []
+        slots: null
+        start: null
+        tags: []
+    */
+    
     return (
-      <Box maxW='lg' borderWidth='1px' borderRadius='lg' overflow='hidden' as='button' textAlign={"left"} marginBottom={"10px"} boxShadow='md'>
+      <Box maxW='lg' borderWidth='1px' borderRadius='lg' overflow='hidden' as='button' onClick={onOpen} textAlign={"left"} marginBottom={"10px"} boxShadow='md'>
         {/*<Image src={property.imageUrl} alt={property.imageAlt} />*/}
         <Box p='6'>
             <Box
@@ -24,7 +42,7 @@ function EventCard() {
                 lineHeight='tight'
                 isTruncated
             >
-                <Text fontSize={"2xl"}>Basketball at the UREC 5v5</Text>
+                <Text fontSize={"2xl"}>{event.name}</Text>
             </Box>
 
           <Box display='flex' alignItems='baseline'>
@@ -51,10 +69,9 @@ function EventCard() {
                 UREC            
             </Box>
           </Box>*/}
-          <Box>
-            This is the description of the post, this is the description. This is the description of the post, this is the description. This is the description of the post, this is the description.
-            
-          </Box>
+            <Box>
+                {event.description}            
+            </Box>
   
           <Box display='flex' mt='1' alignItems='center'>
             {Array(10)
@@ -67,6 +84,23 @@ function EventCard() {
             </Box>
           </Box>
         </Box>
+        <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+                <ModalHeader>{event.title}</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+                {event.description}
+            </ModalBody>
+
+            <ModalFooter>
+                <Button colorScheme='blue' mr={3} onClick={onClose}>
+                Close
+                </Button>
+                <Button variant='ghost'>Secondary Action</Button>
+            </ModalFooter>
+            </ModalContent>
+        </Modal>
       </Box>
     )
 }

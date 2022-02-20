@@ -22,8 +22,11 @@ function Navbar() {
         <Container minWidth="container.lg" borderBottom={"1px solid black"}>
             <Flex verticalAlign={"center"}>
                 <Center flex="1">
-                    <Box w='100%' p={8,2,0,2} color='black' fontSize={"20px"} >
+                    <Box width="200px" p={8,2,0,2} color='black' fontSize={"20px"} >
                         <Link to="/">Coug Events</Link>
+                    </Box>
+                    <Box w='100%' p={8,2,0,2} color='black' fontSize={"18px"} >
+                        <Link to="/createevent">Create Event</Link>
                     </Box>
                 </Center>
                 <Center float={"right"} flex="1" marginLeft={"auto"}>

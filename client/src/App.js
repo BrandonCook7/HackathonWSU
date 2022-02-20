@@ -7,6 +7,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import Events from './pages/events';
 import Login from './pages/login';
 import Register from './pages/register';
+import CreateEvent from './pages/createEvent';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
         <Route path="/events" element={<Events/>} />
+        <Route path="/createevent" element={<CreateEvent/>} />
       </Routes>
     </>
   );
