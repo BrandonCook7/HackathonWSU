@@ -82,15 +82,6 @@ module.exports = {
                 newArr = [authenticated_user]
             }
 
-
-            // if (event.joined.includes(authenticated_user)) {
-            //     target = event.joined.indexOf(authenticated_user)
-            //     event.joined.splice(target,target)
-            // }
-            // else {
-            //     event.joined.push(authenticated_user)                
-            // }
-
             event.joined = newArr
 
             const res = await event.save()
@@ -103,6 +94,11 @@ module.exports = {
     },
     Query: {
         event: (_, {ID}) => Event.findById(ID),
+
+        async findEventByID(_, {event_id}) {
+            return Event.findOne({ _id: event_id })
+        },
+
         async findEventByName(_, {eventName}) {
             return Event.findOne({name: eventName});
         },
@@ -115,6 +111,7 @@ module.exports = {
                 return e;
             }
         },
+
         async getEventsByEmail(_, {email, limit}) {//Get latest events by host with limit
             const hostUser = await User.findOne({ email: email });
             return Event.find({host: hostUser}).sort({created: -1}).limit(limit);
