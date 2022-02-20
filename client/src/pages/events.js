@@ -1,15 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
-import Navbar from './components/navbar';
-import EventCard from './components/eventCard';
-import ProfileCard from './components/profileCard';
+import EventCard from '../components/eventCard';
+import ProfileCard from '../components/profileCard';
 import { Container, Button, MenuItem, VStack, StackDivider, Text, Box, Menu, MenuButton, MenuList, HStack, Flex, Center, Square } from '@chakra-ui/react';
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
-function App() {
+function Events() {
   return (
     <>
-      <Navbar></Navbar>
       <Container minWidth="container.lg">
         <Container minWidth="container.md" >
           <Box margin={4} textAlign={"center"}>
@@ -69,4 +65,4 @@ function App() {
   );
 }
 
-export default App;
+export default Events;
