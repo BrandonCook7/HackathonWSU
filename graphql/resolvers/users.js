@@ -88,7 +88,7 @@ module.exports = {
                 mean_total += rep;
             };
             population_mean = mean_total / user_list.length;
-            //console.log(population_mean);
+            console.log(population_mean);
 
             let variance_total = 0;
             let population_variance = 0;
@@ -97,8 +97,8 @@ module.exports = {
                 let temp_variance = (rep - population_mean)**2;
                 variance_total += temp_variance;
             };
-            population_variance = (variance_total / user_list.length)**(1/2);
-            //console.log(population_variance);
+            population_variance = Math.sqrt(variance_total / user_list.length);
+            console.log(population_variance);
 
             if ((!user) || (!host)) {
                 throw new ApolloError('User or Host does not exist', 'USER_OR_HOST_DOES_NOT_EXISTS');
@@ -115,9 +115,13 @@ module.exports = {
                 console.log("User")
                 console.log(user_rep)
                 console.log(user_z)
-                
-                
-                user.reputation += 1
+
+                if (host_z > user_z) {
+                    amount = ((host_z - user_z) * population_variance) + population_mean
+                } else {
+                    amount = 1
+                }
+                user.reputation += amount
             } 
             else if (user && !(show)){
                 host_rep = host.reputation
@@ -132,9 +136,13 @@ module.exports = {
                 console.log(user_rep)
                 console.log(user_z)
 
-
-                user.reputation -= 1
-            }
+                if ((host_z > user_z) && user_rep >= 0) {
+                    amount = ((host_z - user_z) * population_variance) + population_mean
+                } else {
+                    amount = 0
+                }
+                user.reputation -= amount
+            } 
 
             const res = await user.save()
 
