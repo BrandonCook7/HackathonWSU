@@ -103,12 +103,11 @@ module.exports = {
             return Event.findOne({name: eventName});
         },
         async getLatestEvents(_, {limit, rep}) { //Only only the user to see post's that are their rep or less
-            let e = Event.find({}).sort({created: -1}).limit(limit);
-            if ((rep != null) && (Event.reputation != null)) {
-                e = e.where('reputation').lte(rep);
-                //return (await e).filter(event => Event.reputation <= rep);
-            } else {
-                return e;
+            if (rep) {
+                return Event.find({requirements: {$lte: rep}}).sort({start: -1}).limit(limit)
+            }
+            else{
+                return Event.find({}).sort({start: -1}).limit(limit);
             }
         },
 
