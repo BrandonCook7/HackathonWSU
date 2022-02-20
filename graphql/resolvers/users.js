@@ -89,7 +89,12 @@ module.exports = {
                 user.reputation -= 1
             }
 
-            await user.save()
+            const res = await user.save()
+
+            return {
+                id: res.id,
+                ...res._doc
+            }
         }
     },
     Query: {
