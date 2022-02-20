@@ -10,7 +10,8 @@ type Event {
     requirements: [String],
     location: String,
     tags: [Tag],
-    joined: [User]
+    joined: [User],
+    slots: Int
 }
 
 type Tag {
