@@ -43,7 +43,11 @@ type Mutation {
 input EventInput {
     host_email: String, 
     title: String, 
-    description: String
+    description: String,
+    tags: [String],
+    requirements: [String],
+    location: String,
+    start_time: String
 }
 
 input TagInput{
