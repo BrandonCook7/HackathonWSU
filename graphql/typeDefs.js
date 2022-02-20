@@ -41,6 +41,7 @@ type Query {
     getAllTags: [Tag]
     getEventsByTags(tags: [String]): [Event]
     getAllUsers: [User]
+    getEventUsers(event_name: String): [User]
 }
 
 type Mutation {

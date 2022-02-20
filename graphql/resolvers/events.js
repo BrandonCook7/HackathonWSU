@@ -65,16 +65,17 @@ module.exports = {
 
             for (let i = 0; i < event.joined.length; i++) {
                 let user = event.joined[i]
-                if (user_email != user) {
-                    newArr.push(user)
+                console.log(user)
+                if (user_email === user) {                  
+                    flag = true
                 }
                 else {
-                    flag = true
+                    newArr.push(user)
                 }
             }
 
             if (flag == false){
-                newArr = [user_email]
+                newArr.push(user_email)
             }
 
             event.joined = newArr
@@ -91,11 +92,25 @@ module.exports = {
         event: (_, {ID}) => Event.findById(ID),
 
         async findEventByID(_, {event_id}) {
-            return Event.findOne({ _id: event_id })
-        },        
+            return await Event.findOne({ _id: event_id })
+        },
+        
+        async getEventUsers(_, {event_name}) {
+            
+            let users_array = []
+            let event_object = await Event.findOne({name: event_name})
+
+            for (let i = 0; i < event_object.joined.length; i++) {
+                user_email = event_object.joined[i]
+                let new_user = await User.findOne({ email: user_email })
+                users_array.push(new_user)
+            }
+
+            return users_array
+        },
 
         async findEventByName(_, {eventName}) {
-            return Event.findOne({name: eventName});
+            return await Event.findOne({name: eventName});
         },
         async getLatestEvents(_, {limit, rep}) { //Only only the user to see post's that are their rep or less
             let e = Event.find({}).sort({created: -1}).limit(limit);
