@@ -50,5 +50,6 @@ module.exports = {
     },
     Query: {
         event: (_, {ID}) => Event.findById(ID)
+        
     }
 }
