@@ -12,38 +12,34 @@ const { events } = require('../../models/User');
 
 module.exports = {
     Mutation: {
-        async addEvent(_, {eventInput: {user_id, title, description, tags, requirements, location, start_time, slots} }) {
-            const hostUser = await User.findOne({ _id: user_id });
+        async addEvent(_, {eventInput: {user_email, title, description, tags, requirements, location, start_time, slots} }) {
+            const hostUser = await User.findOne({ email: user_email });
 
             if (!hostUser) {
                 throw new ApolloError('User does not exist', 'USER_DOES_NOT_EXISTS');
             }
-
             else{
-
                 categories = []
-
                 for (let i = 0; i < tags.length; i++) {
                     let cat = await Tag.findOne({ category: tags[i] })
                     if (cat) {
-                        categories.push(cat)
+                        categories.push(tags[i])
                     }
                 }
 
-                const addEvent = new Event({
+                const new_event = new Event({
                     name: title,
                     description: description,
-                    host: hostUser,
+                    host: user_email,
                     tags: categories,
                     requirements: requirements,
                     location: location,
                     start: start_time,
                     slots: slots,
-
-                    // start: moment.format(start).valueOf(),
+                    joined: [user_email],
                 });
     
-                const res = await addEvent.save();
+                const res = await new_event.save();
     
                 return {
                     id: res.id,
@@ -51,9 +47,9 @@ module.exports = {
                 }
             }
         },
-        async joinEvent(_, {eventJoin: {user_id, event_id} }) {
+        async joinEvent(_, {eventJoin: {user_email, event_id} }) {
 
-            const authenticated_user = await User.findOne({ _id: user_id });
+            const authenticated_user = await User.findOne({ email: user_email });
             const event = await Event.findOne({ _id: event_id });
 
             if (!authenticated_user) {
@@ -98,6 +94,8 @@ module.exports = {
         async findEventByID(_, {event_id}) {
             return Event.findOne({ _id: event_id })
         },
+
+        
 
         async findEventByName(_, {eventName}) {
             return Event.findOne({name: eventName});
