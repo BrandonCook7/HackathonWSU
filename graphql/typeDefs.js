@@ -25,7 +25,7 @@ type User {
     email: String,
     password: String,
     token: String,
-    reputation: Int
+    reputation: Float
 }
 
 type Query {
