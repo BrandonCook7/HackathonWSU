@@ -30,6 +30,7 @@ type User {
 
 type Query {
     event(id: ID!): Event
+    findEventByID(event_id: ID): Event
     tag(id: ID!): Tag
     user(id: ID!): User
     getUserByEmail(email: String): User
