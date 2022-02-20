@@ -79,24 +79,70 @@ module.exports = {
         async updateReputation(_, {reputationInput: {host_email, email, show}}) {
             const user = await User.findOne({ email: email });
             const host = await User.findOne({ email: host_email });
+            const user_list = await User.find({});
 
-            function get_multipier() {
-                var sample_mean = 0
-                var sample_variance = 0
-            }
+            let mean_total = 0;
+            let population_mean = 0;
+            for (let i = 0; i < user_list.length; i++) {
+                let rep = user_list[i].reputation;
+                mean_total += rep;
+            };
+            population_mean = mean_total / user_list.length;
+            // console.log(population_mean);
+
+            let variance_total = 0;
+            let population_variance = 0;
+            for (let i = 0; i < user_list.length; i++) {
+                let rep = user_list[i].reputation;
+                let temp_variance = (rep - population_mean)**2;
+                variance_total += temp_variance;
+            };
+            population_variance = Math.sqrt(variance_total / user_list.length);
+            // console.log(population_variance);
 
             if ((!user) || (!host)) {
                 throw new ApolloError('User or Host does not exist', 'USER_OR_HOST_DOES_NOT_EXISTS');
             } 
             else if (user && (show)){
-                user_rep = user.get(reputation)
-                host_rep = host.get(reputation)
+                host_rep = host.reputation
+                host_z = ((host_rep - population_mean) / population_variance)
+                // console.log("Host")
+                // console.log(host_rep)
+                // console.log(host_z)
 
-                user.reputation += 1
+                user_rep = user.reputation
+                user_z = ((user_rep - population_mean) / population_variance)
+                // console.log("User")
+                // console.log(user_rep)
+                // console.log(user_z)
+
+                if (host_z > user_z) {
+                    amount = ((host_z - user_z) * population_variance) + population_mean
+                } else {
+                    amount = 1
+                }
+                user.reputation += amount
             } 
             else if (user && !(show)){
-                user.reputation -= 1
-            }
+                host_rep = host.reputation
+                host_z = ((host_rep - population_mean) / population_variance)
+                // console.log("Host")
+                // console.log(host_rep)
+                // console.log(host_z)
+
+                user_rep = user.reputation
+                user_z = ((user_rep - population_mean) / population_variance)
+                // console.log("User")
+                // console.log(user_rep)
+                // console.log(user_z)
+
+                if ((host_z > user_z) && user_rep >= 0) {
+                    amount = ((host_z - user_z) * population_variance) + population_mean
+                } else {
+                    amount = 0
+                }
+                user.reputation -= amount
+            } 
 
             const res = await user.save()
 
