@@ -93,6 +93,14 @@ module.exports = {
         }
     },
     Query: {
-        user: (_, {ID}) => User.findById(ID)
+        user: (_, {ID}) => User.findById(ID),
+        async getUserByEmail(_, {email}) {
+            const res = User.findOne({email: email});
+            return res
+        },
+        // async getUserByUsername(_, {username}) {
+        //     const user = await User.findOne({username});
+        //     return user;
+        // }
     }
-}
+};

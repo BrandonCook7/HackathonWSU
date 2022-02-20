@@ -8,6 +8,7 @@ const {
     UserInputError
 } = require('apollo-server');
 const { ApolloError } = require('apollo-server-errors');
+const { events } = require('../../models/User');
 
 module.exports = {
     Mutation: {
@@ -50,7 +51,18 @@ module.exports = {
         }
     },
     Query: {
-        event: (_, {ID}) => Event.findById(ID)
-        
+        event: (_, {ID}) => Event.findById(ID),
+        async findEventByName(_, {eventName}) {
+            return Event.findOne({name: eventName});
+        },
+        async getLatestEvents(_, {limit}) {
+            return Event.find({}).sort({created: -1}).limit(limit);
+        },
+        async getEventsByEmail(_, {email, limit}) {//Get latest events by host with limit
+            const hostUser = await User.findOne({ email: email });
+            return Event.find({host: hostUser}).sort({created: -1}).limit(limit);
+            //return Event.find({host: hostUser}).sort({created: -1}).limit(limit);
+        }
     }
 }
+

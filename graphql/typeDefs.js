@@ -29,9 +29,13 @@ type User {
 }
 
 type Query {
-    event(id: ID): Event
+    event(id: ID!): Event
     tag(id: ID!): Tag
     user(id: ID!): User
+    getUserByEmail(email: String): User
+    findEventByName(eventName: String): Event
+    getLatestEvents(limit: Int): [Event]
+    getEventsByEmail(email: String, limit: Int): [Event]
 }
 
 type Mutation {
