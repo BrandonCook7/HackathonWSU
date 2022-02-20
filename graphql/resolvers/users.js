@@ -79,6 +79,11 @@ module.exports = {
         async updateReputation(_, {reputationInput: {email, show}}) {
             const user = await User.findOne({ email: email });
 
+            function get_multipier() {
+                var sample_mean = 0
+                var sample_variance = 0
+            }
+
             if (!user) {
                 throw new ApolloError('User does not exist', 'USER_DOES_NOT_EXISTS');
             } 

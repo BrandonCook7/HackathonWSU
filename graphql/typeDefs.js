@@ -54,7 +54,7 @@ input EventInput {
     title: String, 
     description: String,
     tags: [String],
-    requirements: [String],
+    requirements: Int,
     location: String,
     start_time: String,
     slots: Int
