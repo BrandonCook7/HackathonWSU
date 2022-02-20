@@ -78,42 +78,50 @@ module.exports = {
         }
     },
     Query: {
-        event: (_, {ID}) => Event.findById(ID),
-        async getEvents(_, {limit}) {//Get latest events with limit
-            const events = await Event.find({}).sort({created: -1}).limit(limit);
-            return events.map(event => {
-                return {
-                    id: event.id,
-                    ...event._doc
-                }
-            });
-        },
-        async getEventsByTag(_, {tag, limit}) {//Get latest events by tag with limit
-            const events = await Event.find({tags: tag}).sort({created: -1}).limit(limit);
-            return events.map(event => {
-                return {
-                    id: event.id,
-                    ...event._doc
-                }
-            });
-        },
-        async getEventsByHost(_, {host, limit}) {//Get latest events by host with limit
-            const events = await Event.find({host: host}).sort({created: -1}).limit(limit);
-            return events.map(event => {
-                return {
-                    id: event.id,
-                    ...event._doc
-                }
-            });
-        },
-        async getEventsByKeyword(_, {keyword, limit}) {//Get latest events by keyword and limit
-            const events = await Event.find({name: {$regex: /keyword/, $options: 'i'}}).sort({created: -1}).limit(limit);
-            return events.map(event => {
-                return {
-                    id: event.id,
-                    ...event._doc
-                }
-            });
-        }
+        // async getEventEmail(_, {email}) {
+        //     const user = await User.findOne({ email });
+        //     const event = await Event.findOne({ user });
+        //     return event;
+        // },
+        // event(_, {ID}) {
+        //     e = Event.find(event => { event.id === ID });
+        //     console.log("test");
+        //     return e;
+        // }
+        event: (_, {ID}) => Event.findById({ID})
     }
-}
+};
+        //event: (_, {ID}) => Event.findById(ID)
+        // async getEvents(_, {limit}) {//Get latest events with limit
+        //     //const events = await Event.find({}).sort({createdAt: -1}).limit(limit);
+        //     //return events;
+        //     //const events = await Event.find({}).sort({created: -1}).limit(limit);
+        //     //return events;
+        // },
+        // async getEventsByTag(_, {tag, limit}) {//Get latest events by tag with limit
+        //     const events = await Event.find({tags: tag}).sort({created: -1}).limit(limit);
+        //     return events.map(event => {
+        //         return {
+        //             id: event.id,
+        //             ...event._doc
+        //         }
+        //     });
+        // },
+        // async getEventsByHost(_, {host, limit}) {//Get latest events by host with limit
+        //     const events = await Event.find({host: host}).sort({created: -1}).limit(limit);
+        //     return events.map(event => {
+        //         return {
+        //             id: event.id,
+        //             ...event._doc
+        //         }
+        //     });
+        // },
+        // async getEventsByKeyword(_, {keyword, limit}) {//Get latest events by keyword and limit
+        //     const events = await Event.find({name: {$regex: /keyword/, $options: 'i'}}).sort({created: -1}).limit(limit);
+        //     return events.map(event => {
+        //         return {
+        //             id: event.id,
+        //             ...event._doc
+        //         }
+        //     });
+        // }

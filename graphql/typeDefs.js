@@ -28,7 +28,7 @@ type User {
 }
 
 type Query {
-    event(id: ID): Event
+    event(id: ID!): Event
     tag(id: ID!): Tag
     user(id: ID!): User
 }

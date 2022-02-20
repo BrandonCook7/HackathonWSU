@@ -27,9 +27,13 @@ module.exports = {
                 id: res.id,
                 ...res._doc
             };
-        },
+        }
     },
     Query: {
         tag: (_, {ID}) => Tag.findById(ID)
+        // async getAllTags(_) {
+        //     const tags = await Tag.find({});
+        //     return tags;
+        // }
     }
-}
+};

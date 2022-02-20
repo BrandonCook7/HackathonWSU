@@ -78,19 +78,15 @@ module.exports = {
         }
     },
     Query: {
-        user: (_, {ID}) => User.findById(ID),
-        // async getUser(_, {ID}) {
-        //     const user = await User.findById(ID);
+        user: (_, {ID}) => User.findById(ID)
+        // async getUserByEmail(_, {email}) {
+        //     const user = await User.findOne({email});
         //     return user;
         // },
-        async getUserByEmail(_, {email}) {
-            const user = await User.findOne({email});
-            return user;
-        },
-        async getUserByUsername(_, {username}) {
-            const user = await User.findOne({username});
-            return user;
-        }
+        // async getUserByUsername(_, {username}) {
+        //     const user = await User.findOne({username});
+        //     return user;
+        // }
 
     }
-}
+};
