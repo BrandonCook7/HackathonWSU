@@ -30,6 +30,9 @@ module.exports = {
                     ...res._doc
                 }
             }
+        },
+        async joinEvent(_, {joinInput: {} }) {
+
         }
     },
     Query: {
