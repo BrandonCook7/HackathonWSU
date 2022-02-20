@@ -75,6 +75,21 @@ module.exports = {
             } else {
                 throw new ApolloError('Incorrect password', 'INCORRECT_PASSWORD');
             }
+        },
+        async updateReputation(_, {reputationInput: {email, show}}) {
+            const user = await User.findOne({ email: email });
+
+            if (!user) {
+                throw new ApolloError('User does not exist', 'USER_DOES_NOT_EXISTS');
+            } 
+            else if (user && (show)){
+                user.reputation += 1
+            } 
+            else if (user && !(show)){
+                user.reputation -= 1
+            }
+
+            await user.save()
         }
     },
     Query: {
