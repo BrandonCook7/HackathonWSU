@@ -2,6 +2,7 @@ const { gql } = require('apollo-server');
 
 module.exports = gql`
 type Event {
+    uuid: String,
     host: String,
     name: String,
     created: String,
@@ -30,7 +31,7 @@ type User {
 
 type Query {
     event(id: ID!): Event
-    findEventByID(event_id: ID): Event
+    findEventByID(event_id: String): Event
     tag(id: ID!): Tag
     user(id: ID!): User
     getUserByEmail(email: String): User
@@ -41,7 +42,7 @@ type Query {
     getAllTags: [Tag]
     getEventsByTags(tags: [String]): [Event]
     getAllUsers: [User]
-    getEventUsers(event_name: String): [User]
+    getEventUsers(event_id: String): [User]
 }
 
 type Mutation {
@@ -68,7 +69,7 @@ input EventInput {
 
 input EventJoin {
     user_email: String,
-    event_name: String
+    event_id: String
 }
 
 input TagInput{

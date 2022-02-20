@@ -1,6 +1,7 @@
 const { model, Schema } = require("mongoose");
 const User = require('./User');
 const Tag = require('./Tag');
+const { v4: uuidv4 } = require('uuid');
 
 const eventSchema = new Schema({
   host: { type: String }, //Host User
@@ -12,7 +13,8 @@ const eventSchema = new Schema({
   location: { type: String }, //Google API String Location
   tags: { type: [String], default: null },
   joined: { type: [String], default: null },
-  slots: { type: Number }
+  slots: { type: Number },
+  uuid: {type: String, default: uuidv4(), unique: true}
 });
 
 module.exports = model("event", eventSchema);

@@ -47,10 +47,10 @@ module.exports = {
                 }
             }
         },
-        async joinEvent(_, {eventJoin: {user_email, event_name} }) {
+        async joinEvent(_, {eventJoin: {user_email, event_id} }) {
 
             const authenticated_user = await User.findOne({ email: user_email });
-            const event = await Event.findOne({ name: event_name });
+            const event = await Event.findOne({ uuid: event_id });
 
             if (!authenticated_user) {
                 throw new ApolloError('User does not exist', 'USER_DOES_NOT_EXISTS');
@@ -92,13 +92,13 @@ module.exports = {
         event: (_, {ID}) => Event.findById(ID),
 
         async findEventByID(_, {event_id}) {
-            return await Event.findOne({ _id: event_id })
+            return await Event.findOne({ uuid: event_id })
         },
         
-        async getEventUsers(_, {event_name}) {
+        async getEventUsers(_, {event_id}) {
             
             let users_array = []
-            let event_object = await Event.findOne({name: event_name})
+            let event_object = await Event.findOne({uuid: event_id})
 
             for (let i = 0; i < event_object.joined.length; i++) {
                 user_email = event_object.joined[i]
