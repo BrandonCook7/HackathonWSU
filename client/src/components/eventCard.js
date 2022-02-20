@@ -62,7 +62,7 @@ function EventCard() {
             {Array(10)
               .fill('')
               .map((_, i) => (
-                <span class="material-icons" style={{fontSize: "10px", color: property.rating > i ? "green" : "grey" }}>circle</span>
+                <span class="material-icons" style={{fontSize: "16px", color: property.rating > i ? "green" : "grey" }}>circle</span>
               ))}
             <Box as='span' ml='2' color='gray.600' fontSize='sm'>
               3 slots remaining
