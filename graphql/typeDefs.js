@@ -67,7 +67,7 @@ input EventInput {
 
 input EventJoin {
     user_email: String,
-    event_id: String
+    event_name: String
 }
 
 input TagInput{
