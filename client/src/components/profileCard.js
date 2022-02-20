@@ -36,7 +36,6 @@ function ProfileCard() {
             </Box>
           </Box>
 
-
           <Box>
               <strong>Events Attended: 12</strong>
           </Box>
@@ -49,8 +48,6 @@ function ProfileCard() {
             Friends Online
           </Box>
 
-            
-
             <VStack alignContent={"left"} alignItems={"left"}>
                 <Box alignContent={"left"}>
                     <Avatar name='Kola Tioluwani' src='https://bit.ly/dan-abramov' size={"sm"}/>
@@ -61,7 +58,7 @@ function ProfileCard() {
                 <Box alignContent={"left"}>
                     <Avatar name='Kola Tioluwani' src='https://bit.ly/kent-c-dodds' size={"sm"}/>
                     <Box as='span' color='black' fontSize='sm' ml={1}>
-                        Brandon Cock
+                        Brandon Cook
                     </Box>
                 </Box>
                 <Box alignContent={"left"}>
@@ -71,8 +68,6 @@ function ProfileCard() {
                     </Box>
                 </Box>
             </VStack>
-          
-          
         </Box>
       </Box>
     )
