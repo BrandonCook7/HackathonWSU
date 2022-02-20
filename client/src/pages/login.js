@@ -2,7 +2,7 @@ import {useContext, useState} from "react"
 import { AuthContext } from "../context/authContext";
 import { useForm } from "../utility/hooks";
 import { useMutation } from "@apollo/react-hooks";
-import { TextField, Button, Container, Stack, Alert } from "@mui/material";
+import { Input, Button, Container, Stack, Alert, Text } from "@chakra-ui/react";
 
 import { gql } from 'graphql-tag';
 import { useNavigate } from "react-router-dom";
@@ -46,18 +46,19 @@ function Login(props) {
         variables: { loginInput: values }
     });
 
-
     return (
-        <Container spacing={2} maxWidth="sm">
-            <h3>Login</h3>
-            <p>This is the login page, login below!</p>
+        <Container spacing={2} maxWidth="sm" shadow="md" padding={4}>
+            <Text fontSize="2xl">Login</Text>
+            <Text fontSize="md" marginBottom={"10px"}>Welcome to CougEvents, login below!</Text>
             <Stack spacing={2} paddingBottom={2}>
-                <TextField
+                <Text>Email</Text>
+                <Input 
                     label="Email"
                     name="email"
                     onChange={onChange}
                 />
-                <TextField
+                <Text>Password</Text>
+                <Input 
                     label="Password"
                     name="password"
                     onChange={onChange}
@@ -65,12 +66,12 @@ function Login(props) {
             </Stack>
             {errors.map(function(error){
                 return (
-                    <Alert severity="error">
+                    <Alert status='error'>
                         {error.message}
                     </Alert>
                 );
             })}
-            <Button variant="contained" onClick={onSubmit}>Login</Button>
+            <Button colorScheme='blue' onClick={onSubmit}>Login</Button>
         </Container>
     );
 }

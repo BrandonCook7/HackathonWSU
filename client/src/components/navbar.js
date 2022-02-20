@@ -1,6 +1,6 @@
 
 import { useContext } from 'react';
-import { Flex, Container, MenuItem, Box, Button } from '@chakra-ui/react';
+import { Flex, Container, MenuItem, Box, Button, Center } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
@@ -16,22 +16,28 @@ function Navbar() {
     }
 
     return (
-        <Container minWidth="container.lg">
-            <Box w='100%' p={8,2,0,2} color='black' fontSize={"20px"} borderBottom={"1px solid black"}>
-                Coug Events
-            </Box>
-            <Box alignItems={"right"}>
-                { user ?
-                    <>
-                        <Button style={{textDecoration: "none", color: "white"}} onClick={onLogout}>Logout</Button>
-                    </>
-                :
-                    <>
-                        <Link to="/login" style={{textDecoration: "none", color: "white", marginRight: "10px"}}>Login</Link>
-                        <Link to="/register" style={{textDecoration: "none", color: "white"}}>Register</Link>
-                    </>
-                }
-            </Box>
+        <Container minWidth="container.lg" borderBottom={"1px solid black"}>
+            <Flex verticalAlign={"center"}>
+                <Center flex="1">
+                    <Box w='100%' p={8,2,0,2} color='black' fontSize={"20px"} >
+                        Coug Events
+                    </Box>
+                </Center>
+                <Center float={"right"} flex="1" marginLeft={"auto"}>
+                    <Box alignItems={"right"} top={"50%"}>
+                        { user ?
+                            <>
+                                <Button onClick={onLogout}>Logout</Button>
+                            </>
+                        :
+                            <>
+                                <Link to="/login">Login</Link>
+                                <Link to="/register">Register</Link>
+                            </>
+                        }
+                    </Box>
+                </Center>
+            </Flex>
         </Container>
     )
 }

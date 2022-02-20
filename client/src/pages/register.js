@@ -2,7 +2,7 @@ import {useContext, useState} from "react"
 import { AuthContext } from "../context/authContext";
 import { useForm } from "../utility/hooks";
 import { useMutation } from "@apollo/react-hooks";
-import { TextField, Button, Container, Stack, Alert } from "@mui/material";
+import { Input, Button, Container, Stack, Alert, Text } from "@chakra-ui/react";
 
 import { gql } from 'graphql-tag';
 import { useNavigate } from "react-router-dom";
@@ -50,26 +50,30 @@ function Register(props) {
     });
 
     return (
-        <Container spacing={2} maxWidth="sm">
-            <h3>Register</h3>
-            <p>This is the register page, register below to create an account!</p>
+        <Container spacing={2} maxWidth="sm" shadow="md" padding={4}>
+            <Text fontSize="2xl">Register</Text>
+            <Text fontSize="md" marginBottom={"10px"}>This is the register page, register below to create an account!</Text>
             <Stack spacing={2} paddingBottom={2}>
-                <TextField
+                <Text >Username</Text>
+                <Input
                     label="Username"
                     name="username"
                     onChange={onChange}
                 />
-                <TextField
+                <Text >Email</Text>
+                <Input
                     label="Email"
                     name="email"
                     onChange={onChange}
                 />
-                <TextField
+                <Text>Password</Text>
+                <Input
                     label="Password"
                     name="password"
                     onChange={onChange}
                 />
-                <TextField
+                <Text>Confirm password</Text>
+                <Input
                     label="Confirm password"
                     name="confirmPassword"
                     onChange={onChange}
@@ -77,12 +81,12 @@ function Register(props) {
             </Stack>
             {errors.map(function(error){
                 return (
-                    <Alert severity="error">
+                    <Alert status="error">
                         {error.message}
                     </Alert>
                 );
             })}
-            <Button variant="contained" onClick={onSubmit}>Register</Button>
+            <Button colorScheme='blue' onClick={onSubmit}>Register</Button>
         </Container>
     )
 }

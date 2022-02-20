@@ -36,7 +36,6 @@ function ProfileCard() {
             </Box>
           </Box>
 
-
           <Box>
               <strong>Events Attended: 12</strong>
           </Box>
@@ -49,7 +48,6 @@ function ProfileCard() {
             Friends Online
           </Box>
 
-            
 
             <VStack alignContent={"left"} alignItems={"left"}>
                 <Box alignContent={"left"}>
