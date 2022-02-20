@@ -55,7 +55,7 @@ type Mutation {
 }
 
 input EventInput {
-    user_id: String, 
+    email: String, 
     title: String, 
     description: String,
     tags: [String],
@@ -66,7 +66,7 @@ input EventInput {
 }
 
 input EventJoin {
-    user_id: String,
+    email: String,
     event_id: String
 }
 

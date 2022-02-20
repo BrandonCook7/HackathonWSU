@@ -12,8 +12,8 @@ const { events } = require('../../models/User');
 
 module.exports = {
     Mutation: {
-        async addEvent(_, {eventInput: {user_id, title, description, tags, requirements, location, start_time, slots} }) {
-            const hostUser = await User.findOne({ _id: user_id });
+        async addEvent(_, {eventInput: {email, title, description, tags, requirements, location, start_time, slots} }) {
+            const hostUser = await User.findOne({ email: email });
 
             if (!hostUser) {
                 throw new ApolloError('User does not exist', 'USER_DOES_NOT_EXISTS');
@@ -51,9 +51,9 @@ module.exports = {
                 }
             }
         },
-        async joinEvent(_, {eventJoin: {user_id, event_id} }) {
+        async joinEvent(_, {eventJoin: {email, event_id} }) {
 
-            const authenticated_user = await User.findOne({ _id: user_id });
+            const authenticated_user = await User.findOne({ email: email });
             const event = await Event.findOne({ _id: event_id });
 
             if (!authenticated_user) {
