@@ -2,15 +2,15 @@ const { gql } = require('apollo-server');
 
 module.exports = gql`
 type Event {
-    host: User,
+    host: String,
     name: String,
     created: String,
     start: String,
     description: String,
     requirements: Float,
     location: String,
-    tags: [Tag],
-    joined: [User],
+    tags: [String],
+    joined: [String],
     slots: Int
 }
 
@@ -55,7 +55,7 @@ type Mutation {
 }
 
 input EventInput {
-    user_id: String, 
+    user_email: String, 
     title: String, 
     description: String,
     tags: [String],
@@ -66,7 +66,7 @@ input EventInput {
 }
 
 input EventJoin {
-    user_id: String,
+    user_email: String,
     event_id: String
 }
 
