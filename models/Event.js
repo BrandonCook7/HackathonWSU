@@ -11,7 +11,7 @@ const eventSchema = new Schema({
   requirements: { type: [String], default: null },
   location: { type: String }, //Google API String Location
   tags: { type: [Tag.schema], default: null },
-  joined: {type: [User.schema] }
+  joined: {type: [User.schema], default: null}
 });
 
 module.exports = model("event", eventSchema);
