@@ -108,9 +108,5 @@ module.exports = {
             const res = User.findOne({email: email});
             return res
         },
-        // async getUserByUsername(_, {username}) {
-        //     const user = await User.findOne({username});
-        //     return user;
-        // }
     }
 };
