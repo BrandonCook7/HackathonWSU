@@ -106,8 +106,14 @@ module.exports = {
         async findEventByName(_, {eventName}) {
             return Event.findOne({name: eventName});
         },
-        async getLatestEvents(_, {limit}) {
-            return Event.find({}).sort({created: -1}).limit(limit);
+        async getLatestEvents(_, {limit, rep}) { //Only only the user to see post's that are their rep or less
+            let e = Event.find({}).sort({created: -1}).limit(limit);
+            if ((rep != null) && (Event.reputation != null)) {
+                e = e.where('reputation').lte(rep);
+                //return (await e).filter(event => Event.reputation <= rep);
+            } else {
+                return e;
+            }
         },
         async getEventsByEmail(_, {email, limit}) {//Get latest events by host with limit
             const hostUser = await User.findOne({ email: email });

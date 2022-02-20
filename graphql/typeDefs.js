@@ -7,7 +7,7 @@ type Event {
     created: String,
     start: String,
     description: String,
-    requirements: [String],
+    requirements: Float,
     location: String,
     tags: [Tag],
     joined: [User],
@@ -34,7 +34,7 @@ type Query {
     user(id: ID!): User
     getUserByEmail(email: String): User
     findEventByName(eventName: String): Event
-    getLatestEvents(limit: Int): [Event]
+    getLatestEvents(limit: Int, rep: Float): [Event]
     getEventsByEmail(email: String, limit: Int): [Event]
     getEventsByKeyword(keyword: String, limit: Int): [Event]
     getAllTags: [Tag]
@@ -58,7 +58,7 @@ input EventInput {
     title: String, 
     description: String,
     tags: [String],
-    requirements: Int,
+    requirements: Float,
     location: String,
     start_time: String,
     slots: Int
