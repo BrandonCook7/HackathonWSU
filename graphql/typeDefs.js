@@ -10,7 +10,8 @@ type Event {
     requirements: [String],
     location: String,
     tags: [Tag],
-    joined: [User]
+    joined: [User],
+    slots: Int
 }
 
 type Tag {
@@ -35,9 +36,13 @@ type Query {
 
 type Mutation {
     addEvent(eventInput: EventInput): Event
+    joinEvent(eventJoin: EventJoin): Event
+
     addTag(tagInput: TagInput): Tag
+
     registerUser(registerInput: RegisterInput): User
     loginUser(loginInput: LoginInput): User
+    updateReputation(reputationInput: ReputationInput): User
 }
 
 input EventInput {
@@ -50,6 +55,10 @@ input EventInput {
     start_time: String
 }
 
+input EventJoin {
+    placeholder: String
+}
+
 input TagInput{
     category: String,
     icon: String,
@@ -60,6 +69,11 @@ input RegisterInput {
     username: String,
     email: String,
     password: String 
+}
+
+input ReputationInput {
+    email: String,
+    show: Int
 }
 
 input LoginInput {
