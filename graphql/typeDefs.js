@@ -27,7 +27,9 @@ type User {
     email: String,
     password: String,
     token: String,
-    reputation: Float
+    reputation: Float,
+    short_description: String,
+    interests: [String]
 }
 
 type Query {

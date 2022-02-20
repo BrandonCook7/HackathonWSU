@@ -6,6 +6,8 @@ const userSchema = new Schema({
   password: { type: String },
   token: { type: String },
   reputation: { type: Number, default: 0},
+  short_description: {type: String},
+  interests: { type: [String], default: [] }
 });
 
 module.exports = model("user", userSchema);
