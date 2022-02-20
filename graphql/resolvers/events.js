@@ -82,15 +82,6 @@ module.exports = {
                 newArr = [authenticated_user]
             }
 
-
-            // if (event.joined.includes(authenticated_user)) {
-            //     target = event.joined.indexOf(authenticated_user)
-            //     event.joined.splice(target,target)
-            // }
-            // else {
-            //     event.joined.push(authenticated_user)                
-            // }
-
             event.joined = newArr
 
             const res = await event.save()
@@ -103,16 +94,51 @@ module.exports = {
     },
     Query: {
         event: (_, {ID}) => Event.findById(ID),
+
+        async findEventByID(_, {event_id}) {
+            return Event.findOne({ _id: event_id })
+        },
+
         async findEventByName(_, {eventName}) {
             return Event.findOne({name: eventName});
         },
-        async getLatestEvents(_, {limit}) {
-            return Event.find({}).sort({created: -1}).limit(limit);
+        async getLatestEvents(_, {limit, rep}) { //Only only the user to see post's that are their rep or less
+            let e = Event.find({}).sort({created: -1}).limit(limit);
+            if ((rep != null) && (Event.reputation != null)) {
+                e = e.where('reputation').lte(rep);
+                //return (await e).filter(event => Event.reputation <= rep);
+            } else {
+                return e;
+            }
         },
+
         async getEventsByEmail(_, {email, limit}) {//Get latest events by host with limit
             const hostUser = await User.findOne({ email: email });
             return Event.find({host: hostUser}).sort({created: -1}).limit(limit);
-            //return Event.find({host: hostUser}).sort({created: -1}).limit(limit);
+        },
+        async getEventsByKeyword(_, {keyword, limit}) {//Get latest events by keyword and limit
+            return Event.find({name: {$regex: keyword, $options: 'i'}}).sort({created: -1}).limit(limit);
+        },
+        //Find events by tags
+        //Filter events by tags
+        async getEventsByTags(_, {tags}) {
+            const events = await Event.find({});
+            let eventList = [];
+            for (let i = 0; i < events.length; i++){
+                let eventTags = events[i].tags;
+                let match = false;
+                for (let j = 0; j < eventTags.length; j++){
+                    for (let k = 0; k < tags.length; k++){
+                        if (eventTags[j].category == tags[k]){
+                            match = true;
+                        }
+                    }
+                }
+                if (match){
+                    eventList.push(events[i]);
+                }
+            }
+            return eventList;
         }
     }
 }

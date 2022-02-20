@@ -8,7 +8,7 @@ const eventSchema = new Schema({
   start: { type: Date },
   name: { type: String },
   description: { type: String },
-  requirements: { type: [String], default: null },
+  requirements: { type: Number, default: null },
   location: { type: String }, //Google API String Location
   tags: { type: [Tag.schema], default: null },
   joined: { type: [User.schema], default: null },

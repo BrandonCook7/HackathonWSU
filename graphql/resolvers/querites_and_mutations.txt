@@ -1,0 +1,142 @@
+    ------ REGISTER ------
+mutation Mutation($registerInput: RegisterInput) {
+  registerUser(registerInput: $registerInput) {
+    username
+    email
+    reputation
+    token
+  }
+}
+
+{
+  "registerInput": {
+    "username": null,
+    "email": null,
+    "password": null
+  }
+}
+
+
+
+    ------ ADD EVENT ------
+mutation Mutation($eventInput: EventInput) {
+  addEvent(eventInput: $eventInput) {
+    host {
+      email
+      reputation
+    }
+  }
+}
+
+{
+  "eventInput": {
+    "user_id": null,
+    "title": null,
+    "description": null,
+    "tags": [],
+    "requirements": [],
+    "location": null,
+    "start_time": null,
+    "slots": null
+  }
+}
+
+
+
+    ------ JOIN / LEAVE EVENT ------
+mutation Mutation($eventJoin: EventJoin) {
+  joinEvent(eventJoin: $eventJoin) {
+    joined {
+      email
+      username
+      reputation
+    }
+  }
+}
+
+{
+  "eventJoin": {
+    "user_id": null,
+    "event_id": null
+  }
+}
+
+
+
+    ------ LOGIN ------
+mutation Mutation($loginInput: LoginInput) {
+  loginUser(loginInput: $loginInput) {
+    username
+    email
+    reputation
+    token
+  }
+}
+
+{
+  "loginInput": {
+    "email": null,
+    "password": null
+  }
+}
+
+
+
+    ------ EDIT REP ------
+mutation Mutation($reputationInput: ReputationInput) {
+  updateReputation(reputationInput: $reputationInput) {
+    reputation
+    username
+    email
+  }
+}
+
+{
+  "reputationInput": {
+    "email": null,
+    "show": null
+  }
+}
+
+
+
+    ------ GET USER BY EMAIL ------
+query Query($email: String) {
+  getUserByEmail(email: $email) {
+    username
+    email
+  }
+}
+
+{
+  "email": null
+}
+
+
+
+    ------ GET LATEST EVENTS -> NO FILTERING ------
+query Query($limit: Int) {
+  getLatestEvents(limit: $limit) {
+    name
+    description
+    requirements
+    created
+    start
+    slots
+
+    tags {
+      category
+    }
+    
+    joined {
+      email
+      username
+    }
+  }
+}
+
+
+
+{
+  "limit": null
+}
