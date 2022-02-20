@@ -31,8 +31,8 @@ module.exports = {
                 }
             }
         },
-        async joinEvent(_, {joinInput: {} }) {
-
+        async joinEvent(_, {eventJoin: {} }) {
+            
         }
     },
     Query: {
