@@ -56,6 +56,11 @@ module.exports = {
         },
         async getLatestEvents(_, {limit}) {
             return Event.find({}).sort({created: -1}).limit(limit);
+        },
+        async getEventsByEmail(_, {email, limit}) {//Get latest events by host with limit
+            const hostUser = await User.findOne({ email: email });
+            return Event.find({host: hostUser}).sort({created: -1}).limit(limit);
+            //return Event.find({host: hostUser}).sort({created: -1}).limit(limit);
         }
     }
 }

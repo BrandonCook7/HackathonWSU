@@ -34,6 +34,7 @@ type Query {
     user(id: ID!): User
     findEventByName(eventName: String): Event
     getLatestEvents(limit: Int): [Event]
+    getEventsByEmail(email: String, limit: Int): [Event]
 }
 
 type Mutation {
