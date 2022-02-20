@@ -17,7 +17,6 @@ const REGISTER_USER = gql`
             email
             username
             token
-            id
         }
     }
 `
@@ -48,7 +47,7 @@ function Register(props) {
         },
         variables: { registerInput: values }
     });
-    
+
     return (
         <Container spacing={2} maxWidth="sm" shadow="md" padding={4}>
             <Text fontSize="2xl">Register</Text>

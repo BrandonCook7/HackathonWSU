@@ -9,23 +9,20 @@ import { AuthContext } from "../context/authContext";
 import gql from 'graphql-tag';
 
 const GET_LATEST_EVENTS = gql`
-query Query($limit: Int) {
-  getLatestEvents(limit: $limit) {
+query Query($limit: Int, $rep: Float) {
+  getLatestEvents(limit: $limit, rep: $rep) {
     name
-    description
-    requirements
+    tags
+    joined
+    uuid
+    host
     created
-    start
     slots
-
-    tags {
-      category
-    }
-    
-    joined {
-      email
-      username
-    }
+    description
+    start
+    requirements
+    location
+    eventHasHappened
   }
 }
 `
@@ -39,7 +36,7 @@ function Events() {
             console.log(data.getLatestEvents);
             setLatestEvents(data.getLatestEvents);
         },
-        variables: { limit: null }
+        variables: { limit: null, rep: null}
     });
 
     console.log(latestEvents);

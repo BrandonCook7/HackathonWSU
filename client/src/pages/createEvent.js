@@ -7,13 +7,11 @@ import { Input, Button, Container, Stack, Alert, Text } from "@chakra-ui/react";
 import { gql } from 'graphql-tag';
 import { useNavigate } from "react-router-dom";
 
-const LOGIN_USER = gql`
+const ADD_EVENT = gql`
 mutation Mutation($eventInput: EventInput) {
   addEvent(eventInput: $eventInput) {
-    host {
-      email
-      reputation
-    }
+    uuid
+    host
   }
 }
 `
@@ -39,11 +37,11 @@ function CreateEvent(props) {
     const [ errors, setErrors ] = useState([]);
 
     function createEventCallback() {
-        loginUser();
+        addEvent();
     }
 
     const {onChange, onSubmit, values } = useForm(createEventCallback, {
-        user_id: 'asdf',
+        user_id: context.user.email ? context.user.email : "",
         title: 'here is my life',
         description: 'what are those man what the fuck are those actually',
         tags: [],
@@ -53,15 +51,31 @@ function CreateEvent(props) {
         slots: 10
     });
     
-    const [loginUser, { loading }] = useMutation(LOGIN_USER, {
-        update(proxy, { data: { loginUser: userData}}) {
-            context.login(userData);
+
+    const [ title, setTitle ] = useState("");
+    const [ description, setDescription ] = useState("");
+    const [ tags, setTags ] = useState("");
+    const [ requirements, setRequirements ] = useState("");
+    
+    const [addEvent, { loading }] = useMutation(ADD_EVENT, {
+        update(proxy, { data }) {
+            console.log(data);
             navigate('/');
         },
         onError({ graphQLErrors }) {
             setErrors(graphQLErrors);
         },
-        variables: { eventInput: values }
+        variables: { eventInput: {
+                "user_email": context.user ? context.user.email : "",
+                "title": "Beech Day Here",
+                "description": "sand",
+                "tags": ["hiking"],
+                "requirements": 5,
+                "location": null,
+                "start_time": null,
+                "slots": 25
+            }
+        }
     });
 
     if (!context.user) {
@@ -106,7 +120,7 @@ function CreateEvent(props) {
                     </Alert>
                 );
             })}
-            <Button colorScheme='blue' onClick={onSubmit}>Create Post</Button>
+            <Button colorScheme='blue' onClick={onSubmit}>Create Event</Button>
         </Container>
     );
 }
