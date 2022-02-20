@@ -1,17 +1,17 @@
 const { gql } = require('apollo-server');
 
+
 module.exports = gql`
 type Event {
-    host: User,
+    host: String,
     name: String,
-    created: String,
-    start: String,
+    joined: [String],
     description: String,
     requirements: Float,
+    slots: Int,
+    tags: [String],
     location: String,
-    tags: [Tag],
-    joined: [User],
-    slots: Int
+    start: String
 }
 
 type Tag {
@@ -25,7 +25,7 @@ type User {
     email: String,
     password: String,
     token: String,
-    reputation: Int
+    reputation: Float
 }
 
 type Query {
@@ -55,7 +55,7 @@ type Mutation {
 }
 
 input EventInput {
-    user_id: String, 
+    user_email: String, 
     title: String, 
     description: String,
     tags: [String],

@@ -3,15 +3,15 @@ const User = require('./User');
 const Tag = require('./Tag');
 
 const eventSchema = new Schema({
-  host: { type: User.schema }, //Host User
-  created: { type: Date, default: Date.now },
-  start: { type: Date },
-  name: { type: String },
+  host: { type: String }, //Host User
+  // created: { type: Date, default: Date.now },
+  start: { type: String },
+  name: { type: String, unique: true },
   description: { type: String },
-  requirements: { type: Number, default: null },
+  requirements: { type: Number },
   location: { type: String }, //Google API String Location
-  tags: { type: [Tag.schema], default: null },
-  joined: { type: [User.schema], default: null },
+  tags: { type: [String] },
+  joined: { type: [String] },
   slots: { type: Number }
 });
 
