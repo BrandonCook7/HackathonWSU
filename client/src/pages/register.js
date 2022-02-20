@@ -17,6 +17,7 @@ const REGISTER_USER = gql`
             email
             username
             token
+            id
         }
     }
 `
@@ -34,12 +35,11 @@ function Register(props) {
     const { onChange, onSubmit, values } = useForm(registerUserCallback, {
         username: '',
         email: '',
-        password: '',
-        confirmPassword: ''
+        password: ''
     });
 
     const [registerUser, { loading }] = useMutation(REGISTER_USER, {
-        update(proxy, { data: { registerUser: userData}}) {
+        update(proxy, { data: { registerUser: userData }}) {
             context.login(userData);
             navigate('/');
         },
@@ -48,7 +48,7 @@ function Register(props) {
         },
         variables: { registerInput: values }
     });
-
+    
     return (
         <Container spacing={2} maxWidth="sm" shadow="md" padding={4}>
             <Text fontSize="2xl">Register</Text>
@@ -60,7 +60,7 @@ function Register(props) {
                     name="username"
                     onChange={onChange}
                 />
-                <Text >Email</Text>
+                <Text>Email</Text>
                 <Input
                     label="Email"
                     name="email"
@@ -72,12 +72,12 @@ function Register(props) {
                     name="password"
                     onChange={onChange}
                 />
-                <Text>Confirm password</Text>
+                {/*<Text>Confirm password</Text>
                 <Input
                     label="Confirm password"
                     name="confirmPassword"
                     onChange={onChange}
-                />
+                />*/}
             </Stack>
             {errors.map(function(error){
                 return (

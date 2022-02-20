@@ -15,24 +15,26 @@ function Navbar() {
         navigate('/');
     }
 
+    console.log(user);
+
     return (
         <Container minWidth="container.lg" borderBottom={"1px solid black"}>
             <Flex verticalAlign={"center"}>
                 <Center flex="1">
                     <Box w='100%' p={8,2,0,2} color='black' fontSize={"20px"} >
-                        Coug Events
+                    <Link to="/">Coug Events</Link>
                     </Box>
                 </Center>
                 <Center float={"right"} flex="1" marginLeft={"auto"}>
-                    <Box alignItems={"right"} top={"50%"}>
+                    <Box alignItems={"right"} top={"50%"} marginLeft={"auto"}>
                         { user ?
                             <>
                                 <Button onClick={onLogout}>Logout</Button>
                             </>
                         :
                             <>
-                                <Link to="/login">Login</Link>
-                                <Link to="/register">Register</Link>
+                                <Link to="/login" style={{"marginLeft": "10px"}}>Login</Link>
+                                <Link to="/register" style={{"marginLeft": "10px"}}>Register</Link>
                             </>
                         }
                     </Box>
