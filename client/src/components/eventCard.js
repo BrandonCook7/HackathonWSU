@@ -1,4 +1,4 @@
-import { Box, Image, Badge } from "@chakra-ui/react";
+import { Box, Image, Badge, Text} from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { Circle } from "material-icons";
 import 'material-icons/iconfont/material-icons.css';
@@ -19,6 +19,14 @@ function EventCard() {
       <Box maxW='lg' borderWidth='1px' borderRadius='lg' overflow='hidden' as='button' textAlign={"left"} marginBottom={"10px"} boxShadow='md'>
         {/*<Image src={property.imageUrl} alt={property.imageAlt} />*/}
         <Box p='6'>
+            <Box
+                fontWeight='semibold'
+                lineHeight='tight'
+                isTruncated
+            >
+                <Text fontSize={"2xl"}>Basketball at the UREC 5v5</Text>
+            </Box>
+
           <Box display='flex' alignItems='baseline'>
             {/*<Badge borderRadius='full' px='2' colorScheme='teal'>
               New
@@ -37,22 +45,12 @@ function EventCard() {
               {property.beds} beds &bull; {property.baths} baths
             </Box>*/}
           </Box>
-  
-          <Box
-            mt='1'
-            fontWeight='semibold'
-            as='h4'
-            lineHeight='tight'
-            isTruncated
-          >
-              Basketball at the UREC 5v5
-          </Box>
-  
-          <Box>
+
+          {/*<Box>
             <Box as='span' color='gray.600' fontSize='sm'>
-                Pullman WA
+                UREC            
             </Box>
-          </Box>
+          </Box>*/}
           <Box>
             This is the description of the post, this is the description. This is the description of the post, this is the description. This is the description of the post, this is the description.
             

@@ -1,10 +1,11 @@
 
 import { useContext } from 'react';
-import { Flex, Container, MenuItem, Box, Button, Center } from '@chakra-ui/react';
+import { Flex, Container, MenuItem, Box, Button, Center, Text} from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
-
+import { useMutation } from "@apollo/react-hooks";
+import { gql } from 'graphql-tag';
 
 function Navbar() {
     let navigate = useNavigate();
@@ -22,14 +23,15 @@ function Navbar() {
             <Flex verticalAlign={"center"}>
                 <Center flex="1">
                     <Box w='100%' p={8,2,0,2} color='black' fontSize={"20px"} >
-                    <Link to="/">Coug Events</Link>
+                        <Link to="/">Coug Events</Link>
                     </Box>
                 </Center>
                 <Center float={"right"} flex="1" marginLeft={"auto"}>
                     <Box alignItems={"right"} top={"50%"} marginLeft={"auto"}>
                         { user ?
                             <>
-                                <Button onClick={onLogout}>Logout</Button>
+                                <Link to="/">Hey {user.email}!</Link>
+                                <Button onClick={onLogout} marginLeft={"10px"}>Logout</Button>
                             </>
                         :
                             <>
