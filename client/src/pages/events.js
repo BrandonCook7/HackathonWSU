@@ -3,7 +3,9 @@ import ProfileCard from '../components/profileCard';
 import { Container, Button, MenuItem, VStack, StackDivider, Text, Box, Menu, MenuButton, MenuList, HStack, Flex, Center, Square } from '@chakra-ui/react';
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useQuery } from '@apollo/react-hooks';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { AuthContext } from "../context/authContext";
+
 import gql from 'graphql-tag';
 
 const GET_LATEST_EVENTS = gql`
@@ -26,6 +28,7 @@ query Query($limit: Int, $rep: Float) {
 
 function Events() {
     const [ latestEvents, setLatestEvents] = useState([]);
+    const { user } = useContext(AuthContext);
 
     const { loading, error, data } = useQuery(GET_LATEST_EVENTS, {
         onCompleted(data) {
@@ -49,13 +52,20 @@ function Events() {
         <Container minWidth="900px">
         <Flex alignContent={"center"}>
           <Box flex='1' align={"center"} position="static">
-            <ProfileCard></ProfileCard>
+            { user ?
+             <ProfileCard></ProfileCard>
+             :
+             <>
+             </>
+            }
           </Box>
           <Box flex='8' align={"center"}>
               { latestEvents.length > 0 ? 
                 latestEvents.map( item => {
                     return (
-                        <EventCard></EventCard>
+                        <>
+                        <EventCard event={item}></EventCard>
+                        </>
                     )
                 })
             :
