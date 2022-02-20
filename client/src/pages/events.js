@@ -26,27 +26,21 @@ query Query($limit: Int) {
     }
   }
 }
-
 `
 
 function Events() {
     const [ latestEvents, setLatestEvents] = useState([]);
 
-    function forceRerender() {
-        console.log("literally slam cock");
-    }
-
     const { loading, error, data } = useQuery(GET_LATEST_EVENTS, {
         onCompleted(data) {
             console.log(data.getLatestEvents);
             setLatestEvents(data.getLatestEvents);
-            forceRerender();
         },
         variables: { limit: null }
     });
 
     console.log(latestEvents);
-
+    console.log(data);
     return (
     <>
       <Container minWidth="container.lg">
@@ -62,11 +56,11 @@ function Events() {
             <ProfileCard></ProfileCard>
           </Box>
           <Box flex='8' align={"center"}>
-              { latestEvents ? 
+              { latestEvents.length > 0 ? 
                 latestEvents.map( item => {
-                  <>
-                    <EventCard></EventCard>
-                  </>
+                    return (
+                        <EventCard></EventCard>
+                    )
                 })
             :
                 <>
