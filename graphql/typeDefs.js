@@ -32,6 +32,8 @@ type Query {
     event(id: ID!): Event
     tag(id: ID!): Tag
     user(id: ID!): User
+    findEventByName(eventName: String): Event
+    getLatestEvents(limit: Int): [Event]
 }
 
 type Mutation {
