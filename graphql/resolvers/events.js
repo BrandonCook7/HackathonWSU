@@ -11,7 +11,7 @@ const { ApolloError } = require('apollo-server-errors');
 
 module.exports = {
     Mutation: {
-        async addEvent(_, {eventInput: {host_email, title, description, tags, requirements, location, start_time} }) {
+        async addEvent(_, {eventInput: {host_email, title, description, tags, requirements, location, start_time, slots} }) {
             const hostUser = await User.findOne({ email: host_email });
 
             if (!hostUser) {
@@ -34,6 +34,7 @@ module.exports = {
                     requirements: requirements,
                     location: location,
                     start: start_time,
+                    slots: slots,
                 });
     
                 const res = await addEvent.save();
@@ -44,11 +45,12 @@ module.exports = {
                 }
             }
         },
-        async joinEvent(_, {eventJoin: {email} }) {
+        async joinEvent(_, {eventJoin: {event_id} }) {
             
         }
     },
     Query: {
         event: (_, {ID}) => Event.findById(ID)
+        
     }
 }

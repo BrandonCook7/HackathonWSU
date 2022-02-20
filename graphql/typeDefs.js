@@ -52,11 +52,12 @@ input EventInput {
     tags: [String],
     requirements: [String],
     location: String,
-    start_time: String
+    start_time: String,
+    slots: Int
 }
 
 input EventJoin {
-    placeholder: String
+    event_id: String
 }
 
 input TagInput{
