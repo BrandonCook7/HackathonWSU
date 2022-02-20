@@ -3,11 +3,12 @@ import { StarIcon } from "@chakra-ui/icons";
 import { Circle } from "material-icons";
 import { useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button } from "@chakra-ui/react";
 import 'material-icons/iconfont/material-icons.css';
-
+import { useNavigate } from "react-router-dom";
+import Events from "../pages/events";
 
 function EventCard(props) {
     const { isOpen, onOpen, onClose } = useDisclosure()
-
+    let navigate = useNavigate();
     const property = {
       imageUrl: 'https://bit.ly/2Z4KKcF',
       imageAlt: 'Rear view of modern home with pool',
@@ -32,9 +33,14 @@ function EventCard(props) {
         start: null
         tags: []
     */
-    
+
+    function openURL() {
+        navigate('/event/' + event.name);
+    }
+    console.log("HJEREE");
+    console.log(event);
     return (
-      <Box maxW='lg' borderWidth='1px' borderRadius='lg' overflow='hidden' as='button' onClick={onOpen} textAlign={"left"} marginBottom={"10px"} boxShadow='md'>
+      <Box maxW='lg' borderWidth='1px' borderRadius='lg' overflow='hidden' as='button' onClick={openURL} textAlign={"left"} marginBottom={"10px"} boxShadow='md'>
         {/*<Image src={property.imageUrl} alt={property.imageAlt} />*/}
         <Box p='6'>
             <Box
@@ -49,9 +55,14 @@ function EventCard(props) {
             {/*<Badge borderRadius='full' px='2' colorScheme='teal'>
               New
             </Badge>*/}
-            <Badge borderRadius='full' px='2' colorScheme='orange'>
-              Basketball
-            </Badge>
+            {event.tags.map((tag) => {
+                return (<>
+                <Badge borderRadius='full' px='2' colorScheme='blue'>
+                    {tag}
+                </Badge>
+                </>)
+            })}
+            
             {/*<Box
               color='gray.500'
               fontWeight='semibold'
@@ -74,13 +85,13 @@ function EventCard(props) {
             </Box>
   
           <Box display='flex' mt='1' alignItems='center'>
-            {Array(10)
+            {Array(event.slots)
               .fill('')
               .map((_, i) => (
-                <span class="material-icons" style={{fontSize: "16px", color: property.rating > i ? "green" : "grey" }}>circle</span>
+                <span class="material-icons" style={{fontSize: "16px", color: event.joined.length > i ? "green" : "grey" }}>circle</span>
               ))}
             <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-              3 slots remaining
+              {event.slots - event.joined.length} slots remaining
             </Box>
           </Box>
         </Box>

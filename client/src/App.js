@@ -9,6 +9,7 @@ import Login from './pages/login';
 import Register from './pages/register';
 import CreateEvent from './pages/createEvent';
 import { Route, Routes } from 'react-router-dom';
+import EventPage from './pages/eventPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/register" element={<Register/>} />
         <Route path="/events" element={<Events/>} />
         <Route path="/createevent" element={<CreateEvent/>} />
+        <Route path="/event/:id" element={<EventPage/>} />
       </Routes>
     </>
   );
