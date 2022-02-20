@@ -112,7 +112,30 @@ module.exports = {
         async getEventsByEmail(_, {email, limit}) {//Get latest events by host with limit
             const hostUser = await User.findOne({ email: email });
             return Event.find({host: hostUser}).sort({created: -1}).limit(limit);
-            //return Event.find({host: hostUser}).sort({created: -1}).limit(limit);
+        },
+        async getEventsByKeyword(_, {keyword, limit}) {//Get latest events by keyword and limit
+            return Event.find({name: {$regex: keyword, $options: 'i'}}).sort({created: -1}).limit(limit);
+        },
+        //Find events by tags
+        //Filter events by tags
+        async getEventsByTags(_, {tags}) {
+            const events = await Event.find({});
+            let eventList = [];
+            for (let i = 0; i < events.length; i++){
+                let eventTags = events[i].tags;
+                let match = false;
+                for (let j = 0; j < eventTags.length; j++){
+                    for (let k = 0; k < tags.length; k++){
+                        if (eventTags[j].category == tags[k]){
+                            match = true;
+                        }
+                    }
+                }
+                if (match){
+                    eventList.push(events[i]);
+                }
+            }
+            return eventList;
         }
     }
 }

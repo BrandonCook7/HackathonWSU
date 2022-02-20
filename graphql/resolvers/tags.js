@@ -30,10 +30,9 @@ module.exports = {
         }
     },
     Query: {
-        tag: (_, {ID}) => Tag.findById(ID)
-        // async getAllTags(_) {
-        //     const tags = await Tag.find({});
-        //     return tags;
-        // }
+        tag: (_, {ID}) => Tag.findById(ID),
+        async getAllTags() {
+            return Tag.find({})
+        }
     }
 };

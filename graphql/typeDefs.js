@@ -36,6 +36,9 @@ type Query {
     findEventByName(eventName: String): Event
     getLatestEvents(limit: Int): [Event]
     getEventsByEmail(email: String, limit: Int): [Event]
+    getEventsByKeyword(keyword: String, limit: Int): [Event]
+    getAllTags: [Tag]
+    getEventsByTags(tags: [String]): [Event]
 }
 
 type Mutation {
