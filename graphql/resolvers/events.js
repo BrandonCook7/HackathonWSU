@@ -1,5 +1,7 @@
 const Event = require('../../models/Event');
 const User = require('../../models/User');
+const Tag = require('../../models/Tag')
+
 const {
     ApolloServer,
     gql,
@@ -9,18 +11,33 @@ const { ApolloError } = require('apollo-server-errors');
 
 module.exports = {
     Mutation: {
-        async addEvent(_, {eventInput: {host_email, title, description} }) {
+        async addEvent(_, {eventInput: {host_email, title, description, tags, requirements, location, start_time} }) {
             const hostUser = await User.findOne({ email: host_email });
 
             if (!hostUser) {
                 throw new ApolloError('User does not exist', 'USER_DOES_NOT_EXISTS');
             }
+
             else{
+
+                categories = []
+
+                for (let i = 0; i < tags.length; i++){
+                    let cat = await Tag.findOne({ category: tags[i] })
+                    if (cat) {
+                        categories.push(cat)
+                    }
+                }
+
                 const addEvent = new Event({
                     name: title,
                     description: description,
                     host: hostUser,
-                    start: moment.format(start).valueOf(),
+                    tags: categories,
+                    requirements: requirements,
+                    location: location,
+                    start: start_time,
+                    // start: moment.format(start).valueOf(),
                 });
     
                 const res = await addEvent.save();
