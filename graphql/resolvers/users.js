@@ -108,5 +108,8 @@ module.exports = {
             const res = User.findOne({email: email});
             return res
         },
+        async getAllUsers() {
+            return User.find({});
+        }
     }
 };

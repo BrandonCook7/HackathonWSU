@@ -39,6 +39,7 @@ type Query {
     getEventsByKeyword(keyword: String, limit: Int): [Event]
     getAllTags: [Tag]
     getEventsByTags(tags: [String]): [Event]
+    getAllUsers: [User]
 }
 
 type Mutation {
