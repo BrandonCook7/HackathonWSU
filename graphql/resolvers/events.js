@@ -12,15 +12,18 @@ const { events } = require('../../models/User');
 
 module.exports = {
     Mutation: {
-        async addEvent(_, {eventInput: {host_email, title, description, tags, requirements, location, start_time, slots} }) {
-            const hostUser = await User.findOne({ email: host_email });
+        async addEvent(_, {eventInput: {user_id, title, description, tags, requirements, location, start_time, slots} }) {
+            const hostUser = await User.findOne({ _id: user_id });
 
             if (!hostUser) {
                 throw new ApolloError('User does not exist', 'USER_DOES_NOT_EXISTS');
             }
+
             else{
+
                 categories = []
-                for (let i = 0; i < tags.length; i++){
+
+                for (let i = 0; i < tags.length; i++) {
                     let cat = await Tag.findOne({ category: tags[i] })
                     if (cat) {
                         categories.push(cat)
@@ -36,6 +39,8 @@ module.exports = {
                     location: location,
                     start: start_time,
                     slots: slots,
+
+                    // start: moment.format(start).valueOf(),
                 });
     
                 const res = await addEvent.save();
@@ -46,8 +51,54 @@ module.exports = {
                 }
             }
         },
-        async joinEvent(_, {eventJoin: {event_id} }) {
-            
+        async joinEvent(_, {eventJoin: {user_id, event_id} }) {
+
+            const authenticated_user = await User.findOne({ _id: user_id });
+            const event = await Event.findOne({ _id: event_id });
+
+            if (!authenticated_user) {
+                throw new ApolloError('User does not exist', 'USER_DOES_NOT_EXISTS');
+            }
+
+            if (!event) {
+                throw new ApolloError('Event does not exit', 'EVENT_DOES_NOT_EXISTS');
+            }
+
+            let newArr = []
+            let flag = false
+
+            for (let i = 0; i < event.joined.length; i++) {
+                let user = event.joined[i]
+                if (user.email != authenticated_user.email) {
+                    console.log(user.email)
+                    newArr.push(user)
+                }
+                else {
+                    flag = true
+                }
+            }
+
+            if (flag == false){
+                newArr = [authenticated_user]
+            }
+
+
+            // if (event.joined.includes(authenticated_user)) {
+            //     target = event.joined.indexOf(authenticated_user)
+            //     event.joined.splice(target,target)
+            // }
+            // else {
+            //     event.joined.push(authenticated_user)                
+            // }
+
+            event.joined = newArr
+
+            const res = await event.save()
+
+            return {
+                id: res.id,
+                ...res._doc
+            }
         }
     },
     Query: {
